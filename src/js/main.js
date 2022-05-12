@@ -1,9 +1,14 @@
 import ContextManagementEngine from "./context/ContextManagementEngine.js";
 import CameraPlugin from "./context/CameraPlugin.js";
 
-let scene, renderer
 
+/**
+ * Holds context object that allows us to control simple plugins (camera, wireframe, ...) that influence the state of
+ * the scene.
+ */
 let context
+
+let scene, renderer
 
 let geometry, material, mesh
 
