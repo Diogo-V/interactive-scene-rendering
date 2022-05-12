@@ -1,4 +1,9 @@
+import ContextManagementEngine from "./context/ContextManagementEngine.js";
+import CameraPlugin from "./context/CameraPlugin.js";
+
 let camera, scene, renderer
+
+let context = new ContextManagementEngine()
 
 let geometry, material, mesh
 
@@ -106,6 +111,18 @@ function onKeyDown(event) {
   'use strict'
 
   switch (event.keyCode) {
+    case 49:  // key -> 1
+      context.setCamera(CameraPlugin.FRONTAL)
+      break
+    case 50:  // key -> 2
+      context.setCamera(CameraPlugin.TOP)
+      break
+    case 51:  // key -> 3
+      context.setCamera(CameraPlugin.SIDE)
+      break
+    case 52:  // key -> 4
+      context.toggleWireframe()
+      break
     case 65: //A
     case 97: //a
       scene.traverse(function (node) {
@@ -195,3 +212,7 @@ function animate() {
   requestAnimationFrame(animate)
 
 }
+
+
+/* Exports both main functions that are going to be used in our index.html */
+export { init, animate }

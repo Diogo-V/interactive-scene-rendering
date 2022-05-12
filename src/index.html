@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="">
+<html lang="eng">
     <head>
         <meta charset=”utf-8”>
         <title>CG - project #1</title>
@@ -11,11 +11,15 @@
             }
         </style>
         <script src="js/three.js"></script>
-        <script src="js/main.js"></script>
+        <script type="module" src="js/context/ContextManagementEngine.js"></script>
+        <script type="module" src="js/context/CameraPlugin.js"></script>
+        <script type="module" src="js/context/WireframePlugin.js"></script>
+        <script type="module" src="js/main.js"></script>
     </head>
     <body>
-        <script>
-              init();
+        <script type="module">
+          import { init, animate } from "./js/main.js"
+              init()
               animate()
         </script>
     </body>
