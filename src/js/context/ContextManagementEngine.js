@@ -50,4 +50,20 @@ export default class ContextManagementEngine {
     this.#wireframe.toggleState()
   }
 
+  /**
+   * If true, then the user just toggled the wireframe state, and it means that we should update the objects' state.
+   *
+   * @return {boolean} control value
+   */
+  getWireframeJustToggledControl() {
+    return this.#wireframe.getWasToggled()
+  }
+
+  /**
+   * Resets the toggled value and sets it to false.
+   */
+  resetWireframeJustToggledControl() {
+    this.#wireframe.resetWasToggled()
+  }
+
 }

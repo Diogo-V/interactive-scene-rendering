@@ -9,19 +9,25 @@ export default class WireframePlugin {
   #isShown
 
   /**
+   * Tells us if the user toggled the wireframe preview in this current iteration of the event loop.
+   */
+  #wasJustToggled
+
+  /**
    * WireframePlugin class constructor.
    */
   constructor() {
     this.#isShown = false
+    this.#wasJustToggled = false
   }
 
   /**
-   * Gets current show state.
+   * Gets justToggled status.
    *
-   * @return {boolean} preview state
+   * @return {boolean} if true then it was toggled in the last iteration of the event loop
    */
-  getState() {
-    return this.#isShown
+  getWasToggled() {
+    return this.#wasJustToggled
   }
 
   /**
@@ -29,6 +35,14 @@ export default class WireframePlugin {
    */
   toggleState() {
     this.#isShown = !this.#isShown
+    this.#wasJustToggled = true
+  }
+
+  /**
+   * Clears previous control variable value.
+   */
+  resetWasToggled() {
+    this.#wasJustToggled = false
   }
 
 }

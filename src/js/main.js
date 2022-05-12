@@ -1,9 +1,9 @@
 import ContextManagementEngine from "./context/ContextManagementEngine.js";
 import CameraPlugin from "./context/CameraPlugin.js";
 
-let camera, scene, renderer
+let scene, renderer
 
-let context = new ContextManagementEngine()
+let context
 
 let geometry, material, mesh
 
@@ -81,27 +81,6 @@ function createScene() {
 
 
 /**
- * Creates all the required cameras needed in the program (frontal, up and side) and sets the frontal camera as the
- * default camera. The active camera will be then able to be changed on a key press.
- */
-function createCamera() {
-  'use strict'
-
-  // TODO: @Diogo-V -> Create all cameras needed here and just need to change in the display() function which camera
-  //  is going to be used
-
-  camera = new THREE.PerspectiveCamera(70,
-    window.innerWidth / window.innerHeight,
-    1,
-    1000)
-  camera.position.x = 50
-  camera.position.y = 50
-  camera.position.z = 50
-  camera.lookAt(scene.position)
-}
-
-
-/**
  * On a key pressed, this callback is activated and the event of pressing that key is passed to this function.
  * We need to allow multiple keys to be pressed at the same time and thus, updating multiple behaviours.
  *
@@ -122,14 +101,6 @@ function onKeyDown(event) {
       break
     case 52:  // key -> 4
       context.toggleWireframe()
-      break
-    case 65: //A
-    case 97: //a
-      scene.traverse(function (node) {
-        if (node instanceof THREE.Mesh) {
-          node.material.wireframe = !node.material.wireframe
-        }
-      })
       break
     case 83:  //S
     case 115: //s
@@ -152,7 +123,7 @@ function onKeyDown(event) {
  */
 function display() {
   'use strict'
-  renderer.render(scene, camera)
+  renderer.render(scene, context.getCamera())
 }
 
 
@@ -161,12 +132,24 @@ function display() {
  * before they get 'displayed' in the UI again.
  */
 function update() {
+
   // Updates ball state
-  if (ball.userData.jumping) {
+  if (ball.userData.jumping) {  // TODO: mainly used for debug. Should be removed :)
     ball.userData.step += 0.04
     ball.position.y = Math.abs(30 * (Math.sin(ball.userData.step)))
     ball.position.z = 15 * (Math.cos(ball.userData.step))
   }
+
+  /* Updates wireframe of all the objects in the scene */
+  if (context.getWireframeJustToggledControl()) {
+    scene.traverse(function (node) {
+      if (node instanceof THREE.Mesh) {
+        node.material.wireframe = !node.material.wireframe
+      }
+    })
+    context.resetWireframeJustToggledControl()
+  }
+
 }
 
 
@@ -186,8 +169,8 @@ function init() {
   /* Initializes scene (where all the components are going to be put) and camera (component that is going to allow us
    * to 'observe' the scene */
   createScene()
-  createCamera()
-  
+  context = new ContextManagementEngine()
+
   /* Renders everything in the UI */
   display()
   
@@ -215,4 +198,4 @@ function animate() {
 
 
 /* Exports both main functions that are going to be used in our index.html */
-export { init, animate }
+export { init, animate, scene }
