@@ -80,10 +80,109 @@ function createScene() {
 
   scene.add(new THREE.AxisHelper(10))
 
-  createTable(0, 8, 0)
-  createBall(0, 0, 15)
+  //createTable(0, 8, 0)
+  //createBall(0, 0, 15)
+  buildScene()
 }
 
+function buildScene() {
+  //Big Central Donut
+  let radius = 33  // ui: radius
+  let tubeRadius = 0.5  // ui: tubeRadius
+  let radialSegments = 16  // ui: radialSegments
+  let tubularSegments = 24  // ui: tubularSegments
+  let geometry = new THREE.TorusGeometry(
+      radius, tubeRadius,
+      radialSegments, tubularSegments)
+  let material = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
+  let torus = new THREE.Mesh( geometry, material ) 
+  torus.position.x=0
+  torus.position.y=0
+  torus.position.z=0
+  scene.add(torus)
+
+  //Big Central Pyramid
+  radius = 10  // ui: radius
+  let height = 25  // ui: height
+  radialSegments = 4  // ui: radialSegments
+  geometry = new THREE.ConeGeometry(radius, height, radialSegments)
+  material = new THREE.MeshBasicMaterial( { color: 0x03fc20 } )
+  let pyramid = new THREE.Mesh( geometry, material ) 
+  pyramid.position.x=0
+  pyramid.position.y=0
+  pyramid.position.z=-30
+  scene.add(pyramid)
+
+  //Big Front Cube
+
+  let width = 4;  // ui: width
+  height = 4;  // ui: height
+  let depth = 4;  // ui: depth
+  let widthSegments = 4;  // ui: widthSegments
+  let heightSegments = 4;  // ui: heightSegments
+  let depthSegments = 4;  // ui: depthSegments
+  geometry = new THREE.BoxGeometry(
+      width, height, depth,
+      widthSegments, heightSegments, depthSegments);
+  material = new THREE.MeshBasicMaterial( { color: 0xfc3d03 } )
+  let cube = new THREE.Mesh( geometry, material ) 
+  cube.position.x=10
+  cube.position.y=-8
+  cube.position.z=30
+  scene.add(cube)
+ 
+  //Saturn
+  radius = 4;  // ui: radius
+  widthSegments = 12;  // ui: widthSegments
+  heightSegments = 8;  // ui: heightSegments
+  geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+  material = new THREE.MeshBasicMaterial( { color: 0xf1c681 } )
+  let saturn = new THREE.Mesh( geometry, material ) 
+  saturn.position.x=-10
+  saturn.position.y=-10
+  saturn.position.z=25
+  scene.add(saturn)
+
+  radius = 4.5  // ui: radius
+  tubeRadius = 0.2  // ui: tubeRadius
+  radialSegments = 16  // ui: radialSegments
+  tubularSegments = 24  // ui: tubularSegments
+  geometry = new THREE.TorusGeometry(
+      radius, tubeRadius,
+      radialSegments, tubularSegments)
+  material = new THREE.MeshBasicMaterial( { color: 0x94846c } )
+  torus = new THREE.Mesh( geometry, material ) 
+  torus.position.x=-10
+  torus.position.y=-10
+  torus.position.z=25
+  torus.rotation.x = Math.PI / 2;
+  scene.add(torus)
+
+  //Right Side Ball
+  radius = 4;  // ui: radius
+  widthSegments = 12;  // ui: widthSegments
+  heightSegments = 8;  // ui: heightSegments
+  geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+  material = new THREE.MeshBasicMaterial( { color: 0xfc03fc } )
+  let ball = new THREE.Mesh( geometry, material ) 
+  ball.position.x=25
+  ball.position.y=5
+  ball.position.z=15
+  scene.add(ball)
+
+  //Right Side Octahedron
+
+  radius = 5;  // ui: radius
+  geometry = new THREE.OctahedronGeometry(radius);
+  material = new THREE.MeshBasicMaterial( { color: 0x3d03fc } )
+  let octahedron = new THREE.Mesh( geometry, material ) 
+  octahedron.position.x=30
+  octahedron.position.y=24
+  octahedron.position.z=-10
+  scene.add(octahedron)
+
+
+}
 
 /**
  * On a key pressed, this callback is activated and the event of pressing that key is passed to this function.
@@ -139,11 +238,11 @@ function display() {
 function update() {
 
   // Updates ball state
-  if (ball.userData.jumping) {  // TODO: mainly used for debug. Should be removed :)
+  /*if (ball.userData.jumping) {  // TODO: mainly used for debug. Should be removed :)
     ball.userData.step += 0.04
     ball.position.y = Math.abs(30 * (Math.sin(ball.userData.step)))
     ball.position.z = 15 * (Math.cos(ball.userData.step))
-  }
+  }*/
 
   /* Updates wireframe of all the objects in the scene */
   if (context.getWireframeJustToggledControl()) {
