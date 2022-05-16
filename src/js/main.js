@@ -86,15 +86,43 @@ function createScene() {
 }
 
 function buildScene() {
+  //Curved Tube
+  class CustomSinCurve extends THREE.Curve {
+    constructor(scale) {
+      super();
+      this.scale = scale;
+    }
+    getPoint(t) {
+      const tx = t * 5 - 1.5;
+      const ty = Math.sin(2 * Math.PI * t);
+      const tz = 0;
+      return new THREE.Vector3(tx, ty, tz).multiplyScalar(this.scale);
+    }
+  }
+  
+  let path = new CustomSinCurve(6);
+  let tubularSegments = 20;  // ui: tubularSegments
+  let radius = 0.8;  // ui: radius
+  let radialSegments = 8;  // ui: radialSegments
+  let closed = false;  // ui: closed
+  let geometry = new THREE.TubeGeometry(
+      path, tubularSegments, radius, radialSegments, closed);
+  let material = new THREE.MeshBasicMaterial( { color: 0x40ffef } )
+  let tube = new THREE.Mesh( geometry, material ) 
+  tube.position.x=-40
+  tube.position.y=25
+  tube.position.z=-8
+  scene.add(tube)
+
   //Big Central Donut
-  let radius = 33  // ui: radius
+  radius = 33  // ui: radius
   let tubeRadius = 0.5  // ui: tubeRadius
-  let radialSegments = 16  // ui: radialSegments
-  let tubularSegments = 24  // ui: tubularSegments
-  let geometry = new THREE.TorusGeometry(
+  radialSegments = 16  // ui: radialSegments
+  tubularSegments = 24  // ui: tubularSegments
+  geometry = new THREE.TorusGeometry(
       radius, tubeRadius,
       radialSegments, tubularSegments)
-  let material = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
+  material = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
   let torus = new THREE.Mesh( geometry, material ) 
   torus.position.x=0
   torus.position.y=0
@@ -170,6 +198,18 @@ function buildScene() {
   ball.position.z=15
   scene.add(ball)
 
+   //Central Ball
+   radius = 6;  // ui: radius
+   widthSegments = 12;  // ui: widthSegments
+   heightSegments = 8;  // ui: heightSegments
+   geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+   material = new THREE.MeshBasicMaterial( { color: 0xbc40ff } )
+   ball = new THREE.Mesh( geometry, material ) 
+   ball.position.x=10
+   ball.position.y=20
+   ball.position.z=-25
+   scene.add(ball)
+
   //Right Side Octahedron
 
   radius = 5;  // ui: radius
@@ -181,7 +221,37 @@ function buildScene() {
   octahedron.position.z=-10
   scene.add(octahedron)
 
+  //Triangular Prism
+  let radiusTop = 4  // ui: radiusTop
+  let radiusBottom = 4 // ui: radiusBottom
+  height = 8;  // ui: height
+  radialSegments = 3  // ui: radialSegments
+  geometry = new THREE.CylinderGeometry(
+    radiusTop, radiusBottom, height, radialSegments)
+  material = new THREE.MeshBasicMaterial( { color: 0xff7340 } )
+  let prism = new THREE.Mesh( geometry, material ) 
+  prism.position.x=-35
+  prism.position.y=0
+  prism.position.z=10
+  prism.rotation.x = Math.PI / 2
+  prism.rotation.z = Math.PI / 4 +Math.PI / 2
+  scene.add(prism)
 
+  //Small Right Side Torus
+  radius = 3.5 // ui: radius
+  tubeRadius = 0.4  // ui: tubeRadius
+  radialSegments = 16  // ui: radialSegments
+  tubularSegments = 24  // ui: tubularSegments
+  geometry = new THREE.TorusGeometry(
+      radius, tubeRadius,
+      radialSegments, tubularSegments)
+  material = new THREE.MeshBasicMaterial( { color: 0x94846c } )
+  torus = new THREE.Mesh( geometry, material ) 
+  torus.position.x=35
+  torus.position.y=-10
+  torus.position.z=-5
+  torus.rotation.x = Math.PI / 2;
+  scene.add(torus)
 }
 
 /**
