@@ -41,7 +41,7 @@ class CameraPlugin {
       window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 0
     camera.position.y = 0
-    camera.position.z = 50
+    camera.position.z = 300
     camera.lookAt(scene.position)
     this.#front = camera
   }
@@ -53,7 +53,7 @@ class CameraPlugin {
     let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
       window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 0
-    camera.position.y = 50
+    camera.position.y = 300
     camera.position.z = 0
     camera.lookAt(scene.position)
     this.#top = camera
@@ -65,7 +65,7 @@ class CameraPlugin {
   #buildSideCamera(scene) {
     let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
       window.innerHeight / 10, window.innerHeight / -10)
-    camera.position.x = 50
+    camera.position.x = 300
     camera.position.y = 0
     camera.position.z = 0
     camera.lookAt(scene.position)
