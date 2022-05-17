@@ -108,7 +108,7 @@ class Main {
    *
    * @param event key pressed event
    */
-  #onKeyDown(event) {
+  #onKeyDown = (event) => {
     'use strict'
 
     switch (event.keyCode) {
@@ -138,7 +138,7 @@ class Main {
   /**
    * Adds objects to the scene.
    */
-  #buildScene(scene) {
+  #buildScene = (scene) => {
     'use strict'
 
     //Curved Tube
@@ -312,7 +312,7 @@ class Main {
   /**
    * Cleans previous scene from the UI and displays the new objects after they have been updated.
    */
-  #display() {
+  #display = () => {
     'use strict'
     this.getRenderer().render(this.getScene(), this.getContext().getCamera())
   }
@@ -321,7 +321,7 @@ class Main {
    * Defines the update life-cycle event. In this function, we update the state/position of each object in the scene
    * before they get 'displayed' in the UI again.
    */
-  #update() {
+  #update = () => {
 
     /* Updates wireframe of all the objects in the scene */
     if (this.getContext().getWireframeJustToggledControl()) {
@@ -339,7 +339,7 @@ class Main {
    * Main UI loop control function. Is executed 60 times per second to achieve 60 frames/s. We update and then display
    * all items in an infinite loop.
    */
-  animate() {
+  animate = () => {
     'use strict'
 
     /* Update + Display life cycle */
