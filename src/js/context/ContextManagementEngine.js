@@ -1,11 +1,7 @@
-import CameraPlugin from "./CameraPlugin.js";
-import WireframePlugin from "./WireframePlugin.js";
-
-
 /**
  * Describes scene's plugin's context. Also helps manage them.
  */
-export default class ContextManagementEngine {
+class ContextManagementEngine {
 
   /**
    * Holds camera plugin. This camera plugin will manage the cameras state and switch between them.
@@ -20,8 +16,8 @@ export default class ContextManagementEngine {
   /**
    * ContextManagementEngine class constructor.
    */
-  constructor() {
-    this.#camera = new CameraPlugin()
+  constructor(scene) {
+    this.#camera = new CameraPlugin(scene)
     this.#wireframe = new WireframePlugin()
   }
 

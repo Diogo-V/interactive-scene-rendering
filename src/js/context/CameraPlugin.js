@@ -1,10 +1,7 @@
-import { scene } from "../main.js";
-
-
 /**
  * Manages and instantiates cameras in the scene.
  */
-export default class CameraPlugin {
+class CameraPlugin {
 
   /**
    * Holds current camera being used in the scene.
@@ -29,17 +26,17 @@ export default class CameraPlugin {
   /**
    * CameraPlugin class constructor. We set the frontal camera as the default one.
    */
-  constructor() {
-    this.#buildFrontCamera()
-    this.#buildTopCamera()
-    this.#buildSideCamera()
+  constructor(scene) {
+    this.#buildFrontCamera(scene)
+    this.#buildTopCamera(scene)
+    this.#buildSideCamera(scene)
     this.#currentCamera = this.#front
   }
 
   /**
    * Builds Three.js camera with a front view of the scene.
    */
-  #buildFrontCamera() {
+  #buildFrontCamera(scene) {
     let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
       window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 0
@@ -52,7 +49,7 @@ export default class CameraPlugin {
   /**
    * Builds Three.js camera with a top view of the scene.
    */
-  #buildTopCamera() {
+  #buildTopCamera(scene) {
     let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
       window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 0
@@ -65,7 +62,7 @@ export default class CameraPlugin {
   /**
    * Builds Three.js camera with a side view of the scene.
    */
-  #buildSideCamera() {
+  #buildSideCamera(scene) {
     let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
       window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 50

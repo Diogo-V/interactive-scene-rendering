@@ -1,7 +1,7 @@
 /**
  * Manages state of wireframe preview.
  */
-export default class WireframePlugin {
+class WireframePlugin {
 
   /**
    * Tells us if the wireframe is currently being shown or not.
