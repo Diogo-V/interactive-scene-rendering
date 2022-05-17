@@ -40,7 +40,8 @@ export default class CameraPlugin {
    * Builds Three.js camera with a front view of the scene.
    */
   #buildFrontCamera() {
-    let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+    let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
+      window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 0
     camera.position.y = 0
     camera.position.z = 50
@@ -52,7 +53,8 @@ export default class CameraPlugin {
    * Builds Three.js camera with a top view of the scene.
    */
   #buildTopCamera() {
-    let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+    let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
+      window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 0
     camera.position.y = 50
     camera.position.z = 0
@@ -64,7 +66,8 @@ export default class CameraPlugin {
    * Builds Three.js camera with a side view of the scene.
    */
   #buildSideCamera() {
-    let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+    let camera = new THREE.OrthographicCamera(window.innerWidth / -10, window.innerWidth / 10,
+      window.innerHeight / 10, window.innerHeight / -10)
     camera.position.x = 50
     camera.position.y = 0
     camera.position.z = 0
