@@ -155,23 +155,24 @@ class Main {
       }
     }
 
+    // Left "S"
     let path = new CustomSinCurve(10)
     let tubularSegments = 20  // ui: tubularSegments
-    let radius = 2  // ui: radius
+    let radius = 1  // ui: radius
     let radialSegments = 8  // ui: radialSegments
     let closed = false  // ui: closed
     let geometry = new THREE.TubeGeometry(
       path, tubularSegments, radius, radialSegments, closed)
     let material = new THREE.MeshBasicMaterial( { color: 0x40ffef } )
     let tube = new THREE.Mesh( geometry, material )
-    tube.position.x=-115
-    tube.position.y=50
-    tube.position.z=-20
+    tube.position.x = -95
+    tube.position.y = 65
+    tube.position.z = -25
     scene.add(tube)
 
-    //Big Central Donut
+    // Big Central Donut *
     radius = 90  // ui: radius
-    let tubeRadius = 2  // ui: tubeRadius
+    let tubeRadius = 1  // ui: tubeRadius
     radialSegments = 16  // ui: radialSegments
     tubularSegments = 40  // ui: tubularSegments
     geometry = new THREE.TorusGeometry(
@@ -179,28 +180,27 @@ class Main {
       radialSegments, tubularSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
     let torus = new THREE.Mesh( geometry, material )
-    torus.position.x=0
-    torus.position.y=0
-    torus.position.z=0
+    torus.position.x = 0
+    torus.position.y = 0
+    torus.position.z = 0
     scene.add(torus)
 
-    //Big Central Pyramid
-    radius = 50  // ui: radius
-    let height = 100  // ui: height
+    // Big Central Pyramid
+    radius = 40  // ui: radius
+    let height = 105  // ui: height
     radialSegments = 4  // ui: radialSegments
     geometry = new THREE.ConeGeometry(radius, height, radialSegments)
     material = new THREE.MeshBasicMaterial( { color: 0x03fc20 } )
     let pyramid = new THREE.Mesh( geometry, material )
-    pyramid.position.x=0
-    pyramid.position.y=0
-    pyramid.position.z=-150
+    pyramid.position.x = 0
+    pyramid.position.y = 0
+    pyramid.position.z = -140
     scene.add(pyramid)
 
-    //Big Front Cube
-
-    let width = 40  // ui: width
-    height = 40  // ui: height
-    let depth = 40  // ui: depth
+    // Big Front Cube *
+    let width = 50  // ui: width
+    height = 50  // ui: height
+    let depth = 50  // ui: depth
     let widthSegments = 4  // ui: widthSegments
     let heightSegments = 4 // ui: heightSegments
     let depthSegments = 4  // ui: depthSegments
@@ -209,25 +209,25 @@ class Main {
       widthSegments, heightSegments, depthSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xfc3d03 } )
     let cube = new THREE.Mesh( geometry, material )
-    cube.position.x=80
-    cube.position.y=-60
-    cube.position.z=80
+    cube.position.x = 51.5
+    cube.position.y = -75
+    cube.position.z = 75
     scene.add(cube)
 
-    //Saturn
+    // Saturn *
     radius = 24  // ui: radius
     widthSegments = 12  // ui: widthSegments
     heightSegments = 8  // ui: heightSegments
     geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xf1c681 } )
     let saturn = new THREE.Mesh( geometry, material )
-    saturn.position.x=-80
-    saturn.position.y=-50
-    saturn.position.z=40
+    saturn.position.x = -90
+    saturn.position.y = -50
+    saturn.position.z = 35
     scene.add(saturn)
 
     radius = 26  // ui: radius
-    tubeRadius = 2  // ui: tubeRadius
+    tubeRadius = 1  // ui: tubeRadius
     radialSegments = 16  // ui: radialSegments
     tubularSegments = 24  // ui: tubularSegments
     geometry = new THREE.TorusGeometry(
@@ -235,48 +235,47 @@ class Main {
       radialSegments, tubularSegments)
     material = new THREE.MeshBasicMaterial( { color: 0x94846c } )
     torus = new THREE.Mesh( geometry, material )
-    torus.position.x=-80
-    torus.position.y=-50
-    torus.position.z=40
+    torus.position.x = -90
+    torus.position.y = -50
+    torus.position.z = 35
     torus.rotation.x = Math.PI / 2
     scene.add(torus)
 
-    //Right Side Ball
+    // Right Side Ball *
     radius = 15  // ui: radius
     widthSegments = 12  // ui: widthSegments
     heightSegments = 8  // ui: heightSegments
     geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xfc03fc } )
     let ball = new THREE.Mesh( geometry, material )
-    ball.position.x=130
-    ball.position.y=20
-    ball.position.z=60
+    ball.position.x = 125
+    ball.position.y = 10
+    ball.position.z = 60
     scene.add(ball)
 
-    //Central Ball
+    // Central Ball *
     radius = 5  // ui: radius
     widthSegments = 12  // ui: widthSegments
     heightSegments = 8 // ui: heightSegments
     geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xbc40ff } )
     ball = new THREE.Mesh( geometry, material )
-    ball.position.x=30
-    ball.position.y=60
-    ball.position.z=-170
+    ball.position.x = 30
+    ball.position.y = 70
+    ball.position.z = -180
     scene.add(ball)
 
-    //Right Side Octahedron
-
-    radius = 15  // ui: radius
+    // Right Side Octahedron *
+    radius = 10  // ui: radius
     geometry = new THREE.OctahedronGeometry(radius)
     material = new THREE.MeshBasicMaterial( { color: 0x3d03fc } )
     let octahedron = new THREE.Mesh( geometry, material )
-    octahedron.position.x=75
-    octahedron.position.y=50
-    octahedron.position.z=-90
+    octahedron.position.x = 70
+    octahedron.position.y = 50
+    octahedron.position.z = -85
     scene.add(octahedron)
 
-    //Triangular Prism
+    // Triangular Prism
     let radiusTop = 10  // ui: radiusTop
     let radiusBottom = 10 // ui: radiusBottom
     height = 6  // ui: height
@@ -285,14 +284,14 @@ class Main {
       radiusTop, radiusBottom, height, radialSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xff7340 } )
     let prism = new THREE.Mesh( geometry, material )
-    prism.position.x=-110
-    prism.position.y=80
-    prism.position.z=85
+    prism.position.x = -115
+    prism.position.y = 85
+    prism.position.z = 85
     prism.rotation.x = Math.PI / 6
     prism.rotation.z = Math.PI / 2
     scene.add(prism)
 
-    //Small Right Side Torus
+    // Small Right Side Torus *
     radius = 10 // ui: radius
     tubeRadius = 2.5  // ui: tubeRadius
     radialSegments = 16  // ui: radialSegments
@@ -302,18 +301,18 @@ class Main {
       radialSegments, tubularSegments)
     material = new THREE.MeshBasicMaterial( { color: 0x94846c } )
     torus = new THREE.Mesh( geometry, material )
-    torus.position.x=87
-    torus.position.y=-20
-    torus.position.z=-20
+    torus.position.x= 80
+    torus.position.y= -27.5
+    torus.position.z= -15
     torus.rotation.x = Math.PI / 2
     scene.add(torus)
 
     //THREE OBJECTS TO MOVE
 
-    //Cube on Cube
-    width = 10  // ui: width
-    height = 10  // ui: height
-    depth = 10  // ui: depth
+    // Cube on Cube
+    width = 4  // ui: width
+    height = 4  // ui: height
+    depth = 4  // ui: depth
     widthSegments = 5  // ui: widthSegments
     heightSegments = 5  // ui: heightSegments
     depthSegments = 5  // ui: depthSegments
@@ -322,14 +321,14 @@ class Main {
       widthSegments, heightSegments, depthSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xfc9803 } )
     cube = new THREE.Mesh( geometry, material )
-    cube.position.x=0
-    cube.position.y=-30
-    cube.position.z=-45
+    cube.position.x = 0
+    cube.position.y = -18
+    cube.position.z = -45
     scene.add(cube)
 
-    width = 5  // ui: width
-    height = 5  // ui: height
-    depth = 5 // ui: depth
+    width = 20  // ui: width
+    height = 4  // ui: height
+    depth = 20 // ui: depth
     widthSegments = 3  // ui: widthSegments
     heightSegments = 3  // ui: heightSegments
     depthSegments = 3 // ui: depthSegments
@@ -338,32 +337,32 @@ class Main {
       widthSegments, heightSegments, depthSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xfc9803 } )
     cube = new THREE.Mesh( geometry, material )
-    cube.position.x=0
-    cube.position.y=-22.5
-    cube.position.z=-45
+    cube.position.x = 0
+    cube.position.y = -22
+    cube.position.z = -45
     scene.add(cube)
 
-    //Cone
-    radius = 7.5  // ui: radius
-    height = 15  // ui: height
+    // Cone
+    radius = 5  // ui: radius
+    height = 10  // ui: height
     radialSegments = 30  // ui: radialSegments
     geometry = new THREE.ConeGeometry(radius, height, radialSegments)
     material = new THREE.MeshBasicMaterial( { color: 0xfc03e3 } )
     let cone = new THREE.Mesh( geometry, material )
-    cone.position.x=0
-    cone.position.y=10
-    cone.position.z=-45
+    cone.position.x = 0
+    cone.position.y = 5
+    cone.position.z = -45
     cone.rotation.x = Math.PI
     scene.add(cone)
 
-    //Curved Tube
+    // Curved Tube
     class CustomSinCurve2 extends THREE.Curve {
       constructor(scale) {
         super()
         this.scale = scale
       }
       getPoint(t) {
-        const tx = t * 4
+        const tx = t * 3
         const ty = Math.sin(Math.PI * t)
         const tz = 0
         return new THREE.Vector3(tx, ty, tz).multiplyScalar(this.scale)
@@ -372,16 +371,16 @@ class Main {
 
     path = new CustomSinCurve2(5)
     tubularSegments = 20  // ui: tubularSegments
-    radius = 2  // ui: radius
+    radius = 1  // ui: radius
     radialSegments = 8  // ui: radialSegments
     closed = false  // ui: closed
     geometry = new THREE.TubeGeometry(
       path, tubularSegments, radius, radialSegments, closed)
     material = new THREE.MeshBasicMaterial( { color: 0xe3274f } )
     tube = new THREE.Mesh( geometry, material )
-    tube.position.x=-45
-    tube.position.y=3
-    tube.position.z=-45
+    tube.position.x = -45
+    tube.position.y = 0
+    tube.position.z = -45
     tube.rotation.z = Math.PI/5
     scene.add(tube)
 
