@@ -11,6 +11,13 @@ class KeyController {
   #pressed3
   #pressed4
 
+  #pressedUpArrow
+  #pressedDownArrow
+  #pressedLeftArrow
+  #pressedRightArrow
+  #pressedD
+  #pressedC
+
   /**
    * KeyController class constructor.
    */
@@ -30,20 +37,19 @@ class KeyController {
   onKeyPress = (event) => {
     'use strict'
 
-    switch (event.keyCode) {
-      case 49:  // key -> 1
-        this.#pressed1 = true
-        break
-      case 50:  // key -> 2
-        this.#pressed2 = true
-        break
-      case 51:  // key -> 3
-        this.#pressed3 = true
-        break
-      case 52:  // key -> 4
-        this.#pressed4 = true
-        break
-    }
+    /* We need to use if's instead of switch case to allow for multiple keys pressing */
+    if (event.keyCode === 49) this.#pressed1 = true
+    if (event.keyCode === 50) this.#pressed2 = true
+    if (event.keyCode === 51) this.#pressed3 = true
+    if (event.keyCode === 52) this.#pressed4 = true
+
+    if (event.keyCode === 38) this.#pressedUpArrow = true
+    if (event.keyCode === 40) this.#pressedDownArrow = true
+    if (event.keyCode === 37) this.#pressedLeftArrow = true
+    if (event.keyCode === 39) this.#pressedRightArrow = true
+    if (event.keyCode === 68) this.#pressedD = true
+    if (event.keyCode === 67) this.#pressedC = true
+
   }
 
   /**
@@ -51,8 +57,9 @@ class KeyController {
    *
    * @param context {ContextManagementEngine}
    * @param scene 3.js scene object
+   * @param compound {CompoundObject}
    */
-  processKeyPressed = (context, scene) => {
+  processKeyPressed = (context, scene, compound) => {
     'use strict'
 
     /* Changes camera angle */
@@ -77,6 +84,42 @@ class KeyController {
     if (this.#pressed4) {
       context.toggleWireframe(scene)
       this.#pressed4 = false
+    }
+
+    /* Moves articulated object up */
+    if (this.#pressedUpArrow) {
+      compound.move(Direction.UP)
+      this.#pressedUpArrow = false
+    }
+
+    /* Moves articulated object down */
+    if (this.#pressedDownArrow) {
+      compound.move(Direction.DOWN)
+      this.#pressedDownArrow = false
+    }
+
+    /* Moves articulated object to the left */
+    if (this.#pressedLeftArrow) {
+      compound.move(Direction.LEFT)
+      this.#pressedLeftArrow = false
+    }
+
+    /* Moves articulated object to the right */
+    if (this.#pressedRightArrow) {
+      compound.move(Direction.RIGHT)
+      this.#pressedRightArrow = false
+    }
+
+    /* Moves articulated object backwards */
+    if (this.#pressedD) {
+      compound.move(Direction.BACKWARDS)
+      this.#pressedD = false
+    }
+
+    /* Moves articulated object forward */
+    if (this.#pressedC) {
+      compound.move(Direction.FORWARD)
+      this.#pressedC = false
     }
 
   }

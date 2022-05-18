@@ -22,12 +22,18 @@ class Main {
   #controller
 
   /**
+   * Holds articulated object.
+   */
+  #compound
+
+  /**
    * Main class constructor.
    */
   constructor() {
 
     /* Builds components required to manage, control and display our scene */
     this.#renderer = Main.#initRenderer()
+    this.#compound = new CompoundObject()
     this.#scene = this.#initScene()
     this.#context = new ContextManagementEngine(this.getScene())
     this.#controller = new KeyController()
@@ -83,6 +89,13 @@ class Main {
    * @return {THREE.Scene}
    */
   getScene() { return this.#scene }
+
+  /**
+   * Returns compound object.
+   *
+   * @return {CompoundObject}
+   */
+  getCompound() { return this.#compound }
 
   /**
    * Returns context.
@@ -277,7 +290,9 @@ class Main {
     torus.rotation.x = Math.PI / 2
     scene.add(torus)
 
-    //THREE OBJECTS TO MOVE
+    // TODO: start -> THREE OBJECTS TO MOVE
+
+    let cubesGroup = new THREE.Group()
 
     // Cube on Cube
     width = 4  // ui: width
@@ -294,7 +309,7 @@ class Main {
     cube.position.x = 0
     cube.position.y = -18
     cube.position.z = -45
-    scene.add(cube)
+    cubesGroup.add(cube)
 
     width = 20  // ui: width
     height = 4  // ui: height
@@ -310,7 +325,9 @@ class Main {
     cube.position.x = 0
     cube.position.y = -22
     cube.position.z = -45
-    scene.add(cube)
+    cubesGroup.add(cube)
+
+    this.getCompound().setPrimary(cubesGroup)
 
     // Cone
     radius = 5  // ui: radius
@@ -323,7 +340,7 @@ class Main {
     cone.position.y = 5
     cone.position.z = -45
     cone.rotation.x = Math.PI
-    scene.add(cone)
+    this.getCompound().setSecondary(cone)
 
     // Curved Tube
     class CustomSinCurve2 extends THREE.Curve {
@@ -352,7 +369,11 @@ class Main {
     tube.position.y = 0
     tube.position.z = -45
     tube.rotation.z = Math.PI/5
-    scene.add(tube)
+    this.getCompound().setTertiary(tube)
+
+    scene.add(this.getCompound().getGroup())
+
+    // TODO: end -> objects to move
 
   }
 
@@ -371,7 +392,7 @@ class Main {
   #update = () => {
 
     /* Prompts key controller to check which keys were pressed and to delegate actions to the various components */
-    this.getController().processKeyPressed(this.getContext(), this.getScene())
+    this.getController().processKeyPressed(this.getContext(), this.getScene(), this.getCompound())
 
   }
 
