@@ -44,6 +44,7 @@ class CompoundObject {
    */
   setSecondary(secondary) {
     this.getGroup().add(secondary)
+    this.getPrimary().add(secondary)
     this.#secondary = secondary
   }
 
@@ -54,6 +55,7 @@ class CompoundObject {
    */
   setTertiary(tertiary) {
     this.getGroup().add(tertiary)
+    this.getSecondary().add(tertiary)
     this.#tertiary = tertiary
   }
 
@@ -113,6 +115,33 @@ class CompoundObject {
     }
   }
 
+  /**
+   * Rotates articulated object according to the user's input.
+   *
+   * @param rank {Rank} type of rotation (says which components that going to be rotated)
+   * @param side {Side} side of rotation
+   */
+  rotate(rank, side) {
+    let rot = side === Side.LEFT ? __ROTATE_STEP : -__ROTATE_STEP
+    switch (rank) {
+      case Rank.PRIMARY:
+        let axisZ = new THREE.Vector3(0, 0, 1)
+        this.getPrimary().rotateOnAxis(axisZ, rot)
+        break
+
+      case Rank.SECONDARY:
+        let axisY = new THREE.Vector3(0, 1, 0)
+        this.getSecondary().rotateOnAxis(axisY, rot)
+        break
+
+      case Rank.TERTIARY:
+        let axisXY = new THREE.Vector3(1, 1, 0)
+        this.getTertiary().rotateOnAxis(axisXY, rot)
+        break
+    }
+  }
+
 }
 
 const __MOVE_STEP = 1
+const __ROTATE_STEP = 0.03

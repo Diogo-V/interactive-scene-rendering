@@ -18,6 +18,13 @@ class KeyController {
   #pressedD
   #pressedC
 
+  #pressedQ
+  #pressedW
+  #pressedA
+  #pressedS
+  #pressedZ
+  #pressedX
+
   /**
    * KeyController class constructor.
    */
@@ -49,6 +56,13 @@ class KeyController {
     if (event.keyCode === 39) this.#pressedRightArrow = true
     if (event.keyCode === 68) this.#pressedD = true
     if (event.keyCode === 67) this.#pressedC = true
+
+    if (event.keyCode === 81) this.#pressedQ = true
+    if (event.keyCode === 87) this.#pressedW = true
+    if (event.keyCode === 65) this.#pressedA = true
+    if (event.keyCode === 83) this.#pressedS = true
+    if (event.keyCode === 90) this.#pressedZ = true
+    if (event.keyCode === 88) this.#pressedX = true
 
   }
 
@@ -120,6 +134,42 @@ class KeyController {
     if (this.#pressedC) {
       compound.move(Direction.FORWARD)
       this.#pressedC = false
+    }
+
+    /* Rotates articulated object to the left */
+    if (this.#pressedQ) {
+      compound.rotate(Rank.PRIMARY, Side.LEFT)
+      this.#pressedQ = false
+    }
+
+    /* Rotates articulated object to the right */
+    if (this.#pressedW) {
+      compound.rotate(Rank.PRIMARY, Side.RIGHT)
+      this.#pressedW = false
+    }
+
+    /* Rotates secondary articulated object to the left */
+    if (this.#pressedA) {
+      compound.rotate(Rank.SECONDARY, Side.LEFT)
+      this.#pressedA = false
+    }
+
+    /* Rotates secondary articulated object to the right */
+    if (this.#pressedS) {
+      compound.rotate(Rank.SECONDARY, Side.RIGHT)
+      this.#pressedS = false
+    }
+
+    /* Rotates tertiary articulated object to the left */
+    if (this.#pressedZ) {
+      compound.rotate(Rank.TERTIARY, Side.LEFT)
+      this.#pressedZ = false
+    }
+
+    /* Rotates tertiary articulated object to the right */
+    if (this.#pressedX) {
+      compound.rotate(Rank.TERTIARY, Side.RIGHT)
+      this.#pressedX = false
     }
 
   }

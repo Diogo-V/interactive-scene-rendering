@@ -58,9 +58,6 @@ class Main {
     /* Creates scene  */
     let scene = new THREE.Scene()
 
-    /* TODO: debug object */
-    scene.add(new THREE.AxisHelper(10))
-
     /* Adds rest of objects to the scene */
     this.#buildScene(scene)
 
