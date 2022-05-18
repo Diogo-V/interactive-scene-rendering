@@ -4,45 +4,24 @@
 class WireframePlugin {
 
   /**
-   * Tells us if the wireframe is currently being shown or not.
-   */
-  #isShown
-
-  /**
-   * Tells us if the user toggled the wireframe preview in this current iteration of the event loop.
-   */
-  #wasJustToggled
-
-  /**
    * WireframePlugin class constructor.
    */
-  constructor() {
-    this.#isShown = false
-    this.#wasJustToggled = false
-  }
-
-  /**
-   * Gets justToggled status.
-   *
-   * @return {boolean} if true then it was toggled in the last iteration of the event loop
-   */
-  getWasToggled() {
-    return this.#wasJustToggled
-  }
+  constructor() { }
 
   /**
    * Flips the current wireframe state.
+   *
+   * @param scene 3.js scene object
    */
-  toggleState() {
-    this.#isShown = !this.#isShown
-    this.#wasJustToggled = true
-  }
+  toggleState(scene) {
 
-  /**
-   * Clears previous control variable value.
-   */
-  resetWasToggled() {
-    this.#wasJustToggled = false
+    /* Updates wireframe of all the objects in the scene */
+    scene.traverse(function (node) {
+      if (node instanceof THREE.Mesh) {
+        node.material.wireframe = !node.material.wireframe
+      }
+    })
+
   }
 
 }

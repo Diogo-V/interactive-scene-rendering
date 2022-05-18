@@ -30,13 +30,16 @@ class Main {
     this.#renderer = Main.#initRenderer()
     this.#scene = this.#initScene()
     this.#context = new ContextManagementEngine(this.getScene())
+    this.#controller = new KeyController()
 
     /* Renders everything in the UI */
     this.#display()
 
     /* Adds key handling method to the program. This will, latter on, allow us to rotate and change camera perspective
      * after a user input a key */
-    window.addEventListener("keydown", this.#onKeyDown)
+    window.addEventListener("keydown", function(event) {
+      this.getController().onKeyPress(event)
+    }.bind(this))
 
   }
 
@@ -98,42 +101,9 @@ class Main {
   /**
    * Returns key pressing controller.
    *
-   * @return {Controller}
+   * @return {KeyController}
    */
   getController() { return this.#controller }
-
-  /**
-   * On a key pressed, this callback is activated and the event of pressing that key is passed to this function.
-   * We need to allow multiple keys to be pressed at the same time and thus, updating multiple behaviours.
-   *
-   * @param event key pressed event
-   */
-  #onKeyDown = (event) => {
-    'use strict'
-
-    switch (event.keyCode) {
-      case 49:  // key -> 1
-        this.getContext().setCamera(CameraPlugin.FRONTAL)
-        break
-      case 50:  // key -> 2
-        this.getContext().setCamera(CameraPlugin.TOP)
-        break
-      case 51:  // key -> 3
-        this.getContext().setCamera(CameraPlugin.SIDE)
-        break
-      case 52:  // key -> 4
-        this.getContext().toggleWireframe()
-        break
-      case 69:  //E
-      case 101: //e
-        this.getScene().traverse(function (node) {
-          if (node instanceof THREE.AxisHelper) {
-            node.visible = !node.visible
-          }
-        })
-        break
-    }
-  }
 
   /**
    * Adds objects to the scene.
@@ -323,15 +293,8 @@ class Main {
    */
   #update = () => {
 
-    /* Updates wireframe of all the objects in the scene */
-    if (this.getContext().getWireframeJustToggledControl()) {
-      this.getScene().traverse(function (node) {
-        if (node instanceof THREE.Mesh) {
-          node.material.wireframe = !node.material.wireframe
-        }
-      })
-      this.getContext().resetWireframeJustToggledControl()
-    }
+    /* Prompts key controller to check which keys were pressed and to delegate actions to the various components */
+    this.getController().processKeyPressed(this.getContext(), this.getScene())
 
   }
 

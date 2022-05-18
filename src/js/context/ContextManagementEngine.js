@@ -41,25 +41,11 @@ class ContextManagementEngine {
 
   /**
    * Updates wireframe preview state.
-   */
-  toggleWireframe() {
-    this.#wireframe.toggleState()
-  }
-
-  /**
-   * If true, then the user just toggled the wireframe state, and it means that we should update the objects' state.
    *
-   * @return {boolean} control value
+   * @param scene 3.js scene object
    */
-  getWireframeJustToggledControl() {
-    return this.#wireframe.getWasToggled()
-  }
-
-  /**
-   * Resets the toggled value and sets it to false.
-   */
-  resetWireframeJustToggledControl() {
-    this.#wireframe.resetWasToggled()
+  toggleWireframe(scene) {
+    this.#wireframe.toggleState(scene)
   }
 
 }
