@@ -32,12 +32,20 @@ class Main {
   #clock
 
   /**
+   * Holds all the objects that were added to the scene.
+   * 
+   * @type {Array<THREE.Mesh>}
+   */
+  #sceneObjects
+
+  /**
    * Main class constructor.
    */
   constructor() {
 
     /* Builds components required to manage, control and display our scene */
     this.#renderer = Main.#initRenderer()
+    this.#sceneObjects = Array()
     this.#compound = new CompoundObject()
     this.#scene = this.#initScene()
     this.#context = new ContextManagementEngine(this.getScene())
@@ -120,6 +128,13 @@ class Main {
   getRenderer() { return this.#renderer }
 
   /**
+   * Returns a list with the objects added to the scene.
+   *
+   * @return {Array<THREE.Mesh>}
+   */
+  getSceneObjects() { return this.#sceneObjects }
+
+  /**
    * Returns three.js clock.
    *
    * @return {THREE.Clock}
@@ -167,6 +182,7 @@ class Main {
     tube.position.y = 65
     tube.position.z = -25
     scene.add(tube)
+    this.#sceneObjects.push(tube)
 
     // Big Central Donut *
     radius = 90  // ui: radius
@@ -182,6 +198,7 @@ class Main {
     torus.position.y = 0
     torus.position.z = 0
     scene.add(torus)
+    this.#sceneObjects.push(torus)
 
     // Big Central Pyramid
     radius = 40  // ui: radius
@@ -194,6 +211,7 @@ class Main {
     pyramid.position.y = 0
     pyramid.position.z = -140
     scene.add(pyramid)
+    this.#sceneObjects.push(pyramid)
 
     // Big Front Cube *
     let width = 50  // ui: width
@@ -211,6 +229,7 @@ class Main {
     cube.position.y = -75
     cube.position.z = 75
     scene.add(cube)
+    this.#sceneObjects.push(cube)
 
     // Saturn *
     radius = 24  // ui: radius
@@ -223,6 +242,7 @@ class Main {
     saturn.position.y = -50
     saturn.position.z = 35
     scene.add(saturn)
+    this.#sceneObjects.push(saturn)
 
     radius = 26  // ui: radius
     tubeRadius = 1  // ui: tubeRadius
@@ -238,6 +258,7 @@ class Main {
     torus.position.z = 35
     torus.rotation.x = Math.PI / 2
     scene.add(torus)
+    this.#sceneObjects.push(torus)
 
     // Right Side Ball *
     radius = 15  // ui: radius
@@ -250,6 +271,7 @@ class Main {
     ball.position.y = 10
     ball.position.z = 60
     scene.add(ball)
+    this.#sceneObjects.push(ball)
 
     // Central Ball *
     radius = 5  // ui: radius
@@ -262,6 +284,7 @@ class Main {
     ball.position.y = 70
     ball.position.z = -180
     scene.add(ball)
+    this.#sceneObjects.push(ball)
 
     // Right Side Octahedron *
     radius = 10  // ui: radius
@@ -272,6 +295,7 @@ class Main {
     octahedron.position.y = 50
     octahedron.position.z = -85
     scene.add(octahedron)
+    this.#sceneObjects.push(octahedron)
 
     // Triangular Prism
     let radiusTop = 10  // ui: radiusTop
@@ -288,6 +312,7 @@ class Main {
     prism.rotation.x = Math.PI / 6
     prism.rotation.z = Math.PI / 2
     scene.add(prism)
+    this.#sceneObjects.push(prism)
 
     // Small Right Side Torus *
     radius = 10 // ui: radius
@@ -304,6 +329,7 @@ class Main {
     torus.position.z= -15
     torus.rotation.x = Math.PI / 2
     scene.add(torus)
+    this.#sceneObjects.push(torus)
 
     // TODO: start -> THREE OBJECTS TO MOVE
 
@@ -387,6 +413,7 @@ class Main {
     this.getCompound().setTertiary(tube)
 
     scene.add(this.getCompound().getGroup())
+    this.#sceneObjects.push(this.getCompound().getGroup())
 
     // TODO: end -> objects to move
 
@@ -410,7 +437,7 @@ class Main {
     let delta = this.getClock().getDelta()
 
     /* Prompts key controller to check which keys were pressed and to delegate actions to the various components */
-    this.getController().processKeyPressed(this.getContext(), this.getScene(), this.getCompound(), delta)
+    this.getController().processKeyPressed(this.getContext(), this.getSceneObjects(), this.getCompound(), delta)
 
   }
 

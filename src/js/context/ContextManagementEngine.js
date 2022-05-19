@@ -42,10 +42,10 @@ class ContextManagementEngine {
   /**
    * Updates wireframe preview state.
    *
-   * @param scene 3.js scene object
+   * @param objects 3.js scene objects
    */
-  toggleWireframe(scene) {
-    this.#wireframe.toggleState(scene)
+  toggleWireframe(objects) {
+    this.#wireframe.toggleState(objects)
   }
 
 }

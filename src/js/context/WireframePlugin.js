@@ -11,15 +11,16 @@ class WireframePlugin {
   /**
    * Flips the current wireframe state.
    *
-   * @param scene 3.js scene object
+   * @param objects {Array<THREE.Mesh | THREE.Group>} 3.js scene objects
    */
-  toggleState(scene) {
+  toggleState(objects) {
 
     /* Updates wireframe of all the objects in the scene */
-    scene.traverse(function (node) {
-      if (node instanceof THREE.Mesh) {
+    objects.map((node) => {
+      if (node instanceof THREE.Mesh)
         node.material.wireframe = !node.material.wireframe
-      }
+      else
+        this.toggleState(node.children)
     })
 
   }

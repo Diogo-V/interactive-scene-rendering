@@ -72,11 +72,11 @@ class KeyController {
    * Analyses which keys where pressed and performs the requested actions for those keys.
    *
    * @param context {ContextManagementEngine}
-   * @param scene 3.js scene object
+   * @param objects {Array<THREE.Mesh>}
    * @param compound {CompoundObject}
    * @param delta {number}
    */
-  processKeyPressed = (context, scene, compound, delta) => {
+  processKeyPressed = (context, objects, compound, delta) => {
     'use strict'
 
     /* Changes camera angle */
@@ -99,7 +99,7 @@ class KeyController {
 
     /* Updates the wireframe preview state */
     if (this.getMap()[52]) {  // key -> 4
-      context.toggleWireframe(scene)
+      context.toggleWireframe(objects)
       this.getMap()[52] = false
     }
 
