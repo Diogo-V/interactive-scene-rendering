@@ -27,6 +27,11 @@ class Main {
   #compound
 
   /**
+   * Holds clock value and determines delta time. This allows for pcs with lower fps to still get a good image.
+   */
+  #clock
+
+  /**
    * Main class constructor.
    */
   constructor() {
@@ -37,6 +42,7 @@ class Main {
     this.#scene = this.#initScene()
     this.#context = new ContextManagementEngine(this.getScene())
     this.#controller = new KeyController()
+    this.#clock = new THREE.Clock(true)
 
     /* Renders everything in the UI */
     this.#display()
@@ -107,6 +113,13 @@ class Main {
    * @return {THREE.WebGLRenderer}
    */
   getRenderer() { return this.#renderer }
+
+  /**
+   * Returns three.js clock.
+   *
+   * @return {THREE.Clock}
+   */
+  getClock() { return this.#clock }
 
   /**
    * Returns key pressing controller.
@@ -388,8 +401,11 @@ class Main {
    */
   #update = () => {
 
+    /* Gets the elapsed time from the previous frame. This makes fps smoother in lower end pc's */
+    let delta = this.getClock().getDelta()
+
     /* Prompts key controller to check which keys were pressed and to delegate actions to the various components */
-    this.getController().processKeyPressed(this.getContext(), this.getScene(), this.getCompound())
+    this.getController().processKeyPressed(this.getContext(), this.getScene(), this.getCompound(), delta)
 
   }
 

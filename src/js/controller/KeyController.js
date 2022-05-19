@@ -72,8 +72,9 @@ class KeyController {
    * @param context {ContextManagementEngine}
    * @param scene 3.js scene object
    * @param compound {CompoundObject}
+   * @param delta {number}
    */
-  processKeyPressed = (context, scene, compound) => {
+  processKeyPressed = (context, scene, compound, delta) => {
     'use strict'
 
     /* Changes camera angle */
@@ -102,73 +103,73 @@ class KeyController {
 
     /* Moves articulated object up */
     if (this.#pressedUpArrow) {
-      compound.move(Direction.UP)
+      compound.move(Direction.UP, delta)
       this.#pressedUpArrow = false
     }
 
     /* Moves articulated object down */
     if (this.#pressedDownArrow) {
-      compound.move(Direction.DOWN)
+      compound.move(Direction.DOWN, delta)
       this.#pressedDownArrow = false
     }
 
     /* Moves articulated object to the left */
     if (this.#pressedLeftArrow) {
-      compound.move(Direction.LEFT)
+      compound.move(Direction.LEFT, delta)
       this.#pressedLeftArrow = false
     }
 
     /* Moves articulated object to the right */
     if (this.#pressedRightArrow) {
-      compound.move(Direction.RIGHT)
+      compound.move(Direction.RIGHT, delta)
       this.#pressedRightArrow = false
     }
 
     /* Moves articulated object backwards */
     if (this.#pressedD) {
-      compound.move(Direction.BACKWARDS)
+      compound.move(Direction.BACKWARDS, delta)
       this.#pressedD = false
     }
 
     /* Moves articulated object forward */
     if (this.#pressedC) {
-      compound.move(Direction.FORWARD)
+      compound.move(Direction.FORWARD, delta)
       this.#pressedC = false
     }
 
     /* Rotates articulated object to the left */
     if (this.#pressedQ) {
-      compound.rotate(Rank.PRIMARY, Side.LEFT)
+      compound.rotate(Rank.PRIMARY, Side.LEFT, delta)
       this.#pressedQ = false
     }
 
     /* Rotates articulated object to the right */
     if (this.#pressedW) {
-      compound.rotate(Rank.PRIMARY, Side.RIGHT)
+      compound.rotate(Rank.PRIMARY, Side.RIGHT, delta)
       this.#pressedW = false
     }
 
     /* Rotates secondary articulated object to the left */
     if (this.#pressedA) {
-      compound.rotate(Rank.SECONDARY, Side.LEFT)
+      compound.rotate(Rank.SECONDARY, Side.LEFT, delta)
       this.#pressedA = false
     }
 
     /* Rotates secondary articulated object to the right */
     if (this.#pressedS) {
-      compound.rotate(Rank.SECONDARY, Side.RIGHT)
+      compound.rotate(Rank.SECONDARY, Side.RIGHT, delta)
       this.#pressedS = false
     }
 
     /* Rotates tertiary articulated object to the left */
     if (this.#pressedZ) {
-      compound.rotate(Rank.TERTIARY, Side.LEFT)
+      compound.rotate(Rank.TERTIARY, Side.LEFT, delta)
       this.#pressedZ = false
     }
 
     /* Rotates tertiary articulated object to the right */
     if (this.#pressedX) {
-      compound.rotate(Rank.TERTIARY, Side.RIGHT)
+      compound.rotate(Rank.TERTIARY, Side.RIGHT, delta)
       this.#pressedX = false
     }
 
