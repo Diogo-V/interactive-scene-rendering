@@ -33,6 +33,20 @@ class KeyController {
     this.#pressed2 = false
     this.#pressed3 = false
     this.#pressed4 = false
+
+    this.#pressedUpArrow = false
+    this.#pressedDownArrow = false
+    this.#pressedLeftArrow = false
+    this.#pressedRightArrow = false
+    this.#pressedD = false
+    this.#pressedC = false
+
+    this.#pressedQ = false
+    this.#pressedW = false
+    this.#pressedA = false
+    this.#pressedS = false
+    this.#pressedZ = false
+    this.#pressedX = false
   }
 
   /**
