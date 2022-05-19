@@ -37,8 +37,8 @@ class CameraPlugin {
    * Builds Three.js camera with a front view of the scene.
    */
   #buildFrontCamera(scene) {
-    let camera = new THREE.OrthographicCamera(window.innerWidth / -9, window.innerWidth / 9,
-      window.innerHeight / 9, window.innerHeight / -9)
+    let camera = new THREE.OrthographicCamera(window.innerWidth / -__SHIFT_FRONTAL, window.innerWidth / __SHIFT_FRONTAL,
+      window.innerHeight / __SHIFT_FRONTAL, window.innerHeight / -__SHIFT_FRONTAL)
     camera.position.x = 0
     camera.position.y = 0
     camera.position.z = 300
@@ -50,8 +50,8 @@ class CameraPlugin {
    * Builds Three.js camera with a top view of the scene.
    */
   #buildTopCamera(scene) {
-    let camera = new THREE.OrthographicCamera(window.innerWidth / -4, window.innerWidth / 4,
-      window.innerHeight / 4, window.innerHeight / -4)
+    let camera = new THREE.OrthographicCamera(window.innerWidth / -__SHIFT_TOP, window.innerWidth / __SHIFT_TOP,
+      window.innerHeight / __SHIFT_TOP, window.innerHeight / -__SHIFT_TOP)
     camera.position.x = 0
     camera.position.y = 300
     camera.position.z = 0
@@ -63,8 +63,8 @@ class CameraPlugin {
    * Builds Three.js camera with a side view of the scene.
    */
   #buildSideCamera(scene) {
-    let camera = new THREE.OrthographicCamera(window.innerWidth / -9, window.innerWidth / 9,
-      window.innerHeight / 9, window.innerHeight / -9)
+    let camera = new THREE.OrthographicCamera(window.innerWidth / -__SHIFT_SIDE, window.innerWidth / __SHIFT_SIDE,
+      window.innerHeight / __SHIFT_SIDE, window.innerHeight / -__SHIFT_SIDE)
     camera.position.x = 300
     camera.position.y = 0
     camera.position.z = 0
@@ -131,3 +131,6 @@ class CameraPlugin {
 
 /* Holds type of camera that can be instantiated (front, top and side view) */
 const __FRONTAL = 0, __TOP = 1, __SIDE = 2
+const __SHIFT_FRONTAL = 7
+const __SHIFT_TOP = 4
+const __SHIFT_SIDE = 7
