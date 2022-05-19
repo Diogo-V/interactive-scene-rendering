@@ -49,7 +49,7 @@ class KeyController {
   onKeyPress = (event) => {
     'use strict'
 
-    /* Allows multiple keys to be pressed at the same time */
+    /* Allows multiple keys to be pressed at the same time be storing everything in a key map */
     this.getMap()[event.keyCode] = true
 
   }
@@ -61,8 +61,11 @@ class KeyController {
    */
   onKeyUp = (event) => {
     'use strict'
+
+    /* Reset key that was released by the user */
     this.getMap()[event.keyCode] = false
     stop()
+
   }
 
   /**
