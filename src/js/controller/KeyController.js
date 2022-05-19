@@ -4,50 +4,41 @@
 class KeyController {
 
   /**
-   * Set of boolean variables that tell us if a key was pressed.
+   * Holds a map with the keys that are being pressed currently.
    */
-  #pressed1
-  #pressed2
-  #pressed3
-  #pressed4
-
-  #pressedUpArrow
-  #pressedDownArrow
-  #pressedLeftArrow
-  #pressedRightArrow
-  #pressedD
-  #pressedC
-
-  #pressedQ
-  #pressedW
-  #pressedA
-  #pressedS
-  #pressedZ
-  #pressedX
+  #keyMap
 
   /**
    * KeyController class constructor.
    */
   constructor() {
-    this.#pressed1 = false
-    this.#pressed2 = false
-    this.#pressed3 = false
-    this.#pressed4 = false
+    this.#keyMap = {
+      49: false,
+      50: false,
+      51: false,
+      52: false,
+      38: false,
+      40: false,
+      37: false,
+      39: false,
+      68: false,
+      67: false,
+      81: false,
+      87: false,
+      65: false,
+      83: false,
+      90: false,
+      88: false
+    }
 
-    this.#pressedUpArrow = false
-    this.#pressedDownArrow = false
-    this.#pressedLeftArrow = false
-    this.#pressedRightArrow = false
-    this.#pressedD = false
-    this.#pressedC = false
-
-    this.#pressedQ = false
-    this.#pressedW = false
-    this.#pressedA = false
-    this.#pressedS = false
-    this.#pressedZ = false
-    this.#pressedX = false
   }
+
+  /**
+   * Returns key map of keys.
+   *
+   * @return {Map}
+   */
+  getMap() { return this.#keyMap }
 
   /**
    * On a key pressed, this callback is activated and the event of pressing that key is passed to this function.
@@ -58,26 +49,20 @@ class KeyController {
   onKeyPress = (event) => {
     'use strict'
 
-    /* We need to use if's instead of switch case to allow for multiple keys pressing */
-    if (event.keyCode === 49) this.#pressed1 = true
-    if (event.keyCode === 50) this.#pressed2 = true
-    if (event.keyCode === 51) this.#pressed3 = true
-    if (event.keyCode === 52) this.#pressed4 = true
+    /* Allows multiple keys to be pressed at the same time */
+    this.getMap()[event.keyCode] = true
 
-    if (event.keyCode === 38) this.#pressedUpArrow = true
-    if (event.keyCode === 40) this.#pressedDownArrow = true
-    if (event.keyCode === 37) this.#pressedLeftArrow = true
-    if (event.keyCode === 39) this.#pressedRightArrow = true
-    if (event.keyCode === 68) this.#pressedD = true
-    if (event.keyCode === 67) this.#pressedC = true
+  }
 
-    if (event.keyCode === 81) this.#pressedQ = true
-    if (event.keyCode === 87) this.#pressedW = true
-    if (event.keyCode === 65) this.#pressedA = true
-    if (event.keyCode === 83) this.#pressedS = true
-    if (event.keyCode === 90) this.#pressedZ = true
-    if (event.keyCode === 88) this.#pressedX = true
-
+  /**
+   * Resets key map field that are no longer being pressed.
+   *
+   * @param event key up event
+   */
+  onKeyUp = (event) => {
+    'use strict'
+    this.getMap()[event.keyCode] = false
+    stop()
   }
 
   /**
@@ -92,99 +77,87 @@ class KeyController {
     'use strict'
 
     /* Changes camera angle */
-    if (this.#pressed1) {
+    if (this.getMap()[49]) {  // key -> 1
       context.setCamera(CameraPlugin.FRONTAL)
-      this.#pressed1 = false
+      this.getMap()[49] = false
     }
 
     /* Changes camera angle */
-    if (this.#pressed2) {
+    if (this.getMap()[50]) {  // key -> 2
       context.setCamera(CameraPlugin.TOP)
-      this.#pressed2 = false
+      this.getMap()[50] = false
     }
 
     /* Changes camera angle */
-    if (this.#pressed3) {
+    if (this.getMap()[51]) {  // key -> 3
       context.setCamera(CameraPlugin.SIDE)
-      this.#pressed3 = false
+      this.getMap()[51] = false
     }
 
     /* Updates the wireframe preview state */
-    if (this.#pressed4) {
+    if (this.getMap()[52]) {  // key -> 4
       context.toggleWireframe(scene)
-      this.#pressed4 = false
+      this.getMap()[52] = false
     }
 
     /* Moves articulated object up */
-    if (this.#pressedUpArrow) {
+    if (this.getMap()[38]) {  // key -> up
       compound.move(Direction.UP, delta)
-      this.#pressedUpArrow = false
     }
 
     /* Moves articulated object down */
-    if (this.#pressedDownArrow) {
+    if (this.getMap()[40]) {  // key -> down
       compound.move(Direction.DOWN, delta)
-      this.#pressedDownArrow = false
     }
 
     /* Moves articulated object to the left */
-    if (this.#pressedLeftArrow) {
+    if (this.getMap()[37]) {  // key -> left
       compound.move(Direction.LEFT, delta)
-      this.#pressedLeftArrow = false
     }
 
     /* Moves articulated object to the right */
-    if (this.#pressedRightArrow) {
+    if (this.getMap()[39]) {  // key -> right
       compound.move(Direction.RIGHT, delta)
-      this.#pressedRightArrow = false
     }
 
     /* Moves articulated object backwards */
-    if (this.#pressedD) {
+    if (this.getMap()[68]) {  // key -> d
       compound.move(Direction.BACKWARDS, delta)
-      this.#pressedD = false
     }
 
     /* Moves articulated object forward */
-    if (this.#pressedC) {
+    if (this.getMap()[67]) {  // key -> c
       compound.move(Direction.FORWARD, delta)
-      this.#pressedC = false
     }
 
     /* Rotates articulated object to the left */
-    if (this.#pressedQ) {
+    if (this.getMap()[81]) {  // key -> q
       compound.rotate(Rank.PRIMARY, Side.LEFT, delta)
-      this.#pressedQ = false
     }
 
     /* Rotates articulated object to the right */
-    if (this.#pressedW) {
+    if (this.getMap()[87]) {  // key -> w
       compound.rotate(Rank.PRIMARY, Side.RIGHT, delta)
-      this.#pressedW = false
     }
 
     /* Rotates secondary articulated object to the left */
-    if (this.#pressedA) {
+    if (this.getMap()[65]) {  // key -> a
       compound.rotate(Rank.SECONDARY, Side.LEFT, delta)
-      this.#pressedA = false
     }
 
     /* Rotates secondary articulated object to the right */
-    if (this.#pressedS) {
+    if (this.getMap()[83]) {  // key -> s
       compound.rotate(Rank.SECONDARY, Side.RIGHT, delta)
-      this.#pressedS = false
     }
 
     /* Rotates tertiary articulated object to the left */
-    if (this.#pressedZ) {
+    if (this.getMap()[90]) {  // key -> z
       compound.rotate(Rank.TERTIARY, Side.LEFT, delta)
-      this.#pressedZ = false
     }
 
     /* Rotates tertiary articulated object to the right */
-    if (this.#pressedX) {
+    if (this.getMap()[88]) {  // key -> x
       compound.rotate(Rank.TERTIARY, Side.RIGHT, delta)
-      this.#pressedX = false
     }
 
   }

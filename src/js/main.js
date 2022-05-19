@@ -51,7 +51,12 @@ class Main {
      * after a user input a key */
     window.addEventListener("keydown", function(event) {
       this.getController().onKeyPress(event)
-    }.bind(this))
+    }.bind(this), false)
+
+    /* Clears pressed keys when the user stops clicking it */
+    window.addEventListener("keyup", function (event) {
+     this.getController().onKeyUp(event)
+    }.bind(this), false)
 
   }
 
