@@ -333,8 +333,19 @@ class Main {
 
     // TODO: start -> THREE OBJECTS TO MOVE
 
-    let cubesGroup = new THREE.Group()
+    // Cone
+    radius = 5  // ui: radius
+    height = 10  // ui: height
+    radialSegments = 30  // ui: radialSegments
+    geometry = new THREE.ConeGeometry(radius, height, radialSegments)
+    material = new THREE.MeshBasicMaterial( { color: 0xfc03e3 } )
+    let cone = new THREE.Mesh( geometry, material )
+    cone.position.x = 0
+    cone.position.y = 0
+    cone.position.z = 0
+    cone.rotation.x = Math.PI
 
+    let cubesGroup = new THREE.Group()
     // Cube on Cube
     width = 4  // ui: width
     height = 4  // ui: height
@@ -349,7 +360,7 @@ class Main {
     cube = new THREE.Mesh( geometry, material )
     cube.position.x = 0
     cube.position.y = -18
-    cube.position.z = -45
+    cube.position.z = 0
     cubesGroup.add(cube)
 
     width = 20  // ui: width
@@ -365,55 +376,39 @@ class Main {
     cube = new THREE.Mesh( geometry, material )
     cube.position.x = 0
     cube.position.y = -22
-    cube.position.z = -45
+    cube.position.z = 0
     cubesGroup.add(cube)
 
-    this.getCompound().setPrimary(cubesGroup)
 
-    // Cone
-    radius = 5  // ui: radius
-    height = 10  // ui: height
-    radialSegments = 30  // ui: radialSegments
-    geometry = new THREE.ConeGeometry(radius, height, radialSegments)
-    material = new THREE.MeshBasicMaterial( { color: 0xfc03e3 } )
-    let cone = new THREE.Mesh( geometry, material )
-    cone.position.x = 0
-    cone.position.y = 5
-    cone.position.z = -45
-    cone.rotation.x = Math.PI
-    this.getCompound().setSecondary(cone)
-
-    // Curved Tube
-    class CustomSinCurve2 extends THREE.Curve {
-      constructor(scale) {
-        super()
-        this.scale = scale
-      }
-      getPoint(t) {
-        const tx = t * 3
-        const ty = Math.sin(Math.PI * t)
-        const tz = 0
-        return new THREE.Vector3(tx, ty, tz).multiplyScalar(this.scale)
-      }
-    }
-
-    path = new CustomSinCurve2(5)
-    tubularSegments = 20  // ui: tubularSegments
-    radius = 1  // ui: radius
-    radialSegments = 8  // ui: radialSegments
-    closed = false  // ui: closed
-    geometry = new THREE.TubeGeometry(
-      path, tubularSegments, radius, radialSegments, closed)
-    material = new THREE.MeshBasicMaterial( { color: 0xe3274f } )
-    tube = new THREE.Mesh( geometry, material )
-    tube.position.x = -45
-    tube.position.y = 0
-    tube.position.z = -45
-    tube.rotation.z = Math.PI/5
-    this.getCompound().setTertiary(tube)
+    radius = 3  // ui: radius
+    widthSegments = 12  // ui: widthSegments
+    heightSegments = 8 // ui: heightSegments
+    geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
+    material = new THREE.MeshBasicMaterial( { color: 0xbc40ff } )
+    ball = new THREE.Mesh( geometry, material )
+    ball.position.x = -45
+    ball.position.y = 0
+    ball.position.z = 0
 
     scene.add(this.getCompound().getGroup())
     this.#sceneObjects.push(this.getCompound().getGroup())
+
+    // Setting pivot point
+    let pivotPoint1 = new THREE.Object3D();
+    pivotPoint1.position.set(0,0,-45);
+    pivotPoint1.add(cone);
+    this.getCompound().setPrimary(pivotPoint1);
+
+    let pivotPoint2 = new THREE.Object3D();
+    pivotPoint2.position.set(0,0,0);
+    pivotPoint2.add(cubesGroup);
+    this.getCompound().setSecondary(pivotPoint2);
+
+    let pivotPoint3 = new THREE.Object3D();
+    pivotPoint3.position.set(0,-20,0);
+    pivotPoint3.add(ball);
+    this.getCompound().setTertiary(pivotPoint3);
+
 
     // TODO: end -> objects to move
 

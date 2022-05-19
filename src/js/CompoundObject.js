@@ -132,13 +132,13 @@ class CompoundObject {
         break
 
       case Rank.SECONDARY:
-        let axisY = new THREE.Vector3(0, 1, 0)
-        this.getSecondary().rotateOnAxis(axisY, rot)
+        let axisX = new THREE.Vector3(1, 0, 0)
+        this.getSecondary().rotateOnAxis(axisX, rot)
         break
 
       case Rank.TERTIARY:
-        let axisXY = new THREE.Vector3(1, 1, 0)
-        this.getTertiary().rotateOnAxis(axisXY, rot)
+        let axisY = new THREE.Vector3(0, 1, 0)
+        this.getTertiary().rotateOnAxis(axisY, rot)
         break
     }
   }
