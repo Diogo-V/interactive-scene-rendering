@@ -1,7 +1,8 @@
-## Notes:
-https://threejs.org/
+# Interactive Painting Scene Rendering
+Renders an interactive scene of a painting with static cameras
 
-## Dates:
-* E1: 20/05
-* E2: 03/06
-* E3: 17/06
+## Notes:
+Made during the Computer Graphics class
+
+## Links:
+https://threejs.org/
